@@ -1,0 +1,15 @@
+server:
+  port: 8989
+
+spring:
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+    
+turbine:
+  aggregator:
+    clusterConfig: ORDER
+  appConfig: order
+
+  

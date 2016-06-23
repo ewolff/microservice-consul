@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+	DocumentRoot /var/www/html
+
+	# This should be secured!
+	<Location "/balancer-manager">
+	    SetHandler balancer-manager
+        </Location>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	ProxyPreserveHost On
+
+{{range services}}
+
+<Proxy balancer://{{.Name}}>
+{{range service .Name}}  BalancerMember http://{{.Address}}:{{.Port}}
+{{end}}
+</Proxy>
+    	ProxyPass        /{{.Name}} balancer://{{.Name}}
+    	ProxyPassReverse /{{.Name}} balancer://{{.Name}}
+
+{{end}}
+
+</VirtualHost>
