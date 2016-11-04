@@ -23,7 +23,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Camden.RELEASE</spring-cloud.version>
+		<spring-cloud.version>Camden.SR1</spring-cloud.version>
 	</properties>
 
 	<dependencyManagement>
