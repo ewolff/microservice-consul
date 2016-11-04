@@ -40,8 +40,7 @@ public class CatalogClient {
 	private Collection<Item> itemsCache = null;
 
 	@Autowired
-	public CatalogClient(
-			@Value("${catalog.service.host:catalog}") String catalogServiceHost,
+	public CatalogClient(@Value("${catalog.service.host:catalog}") String catalogServiceHost,
 			@Value("${catalog.service.port:8080}") long catalogServicePort,
 			@Value("${ribbon.eureka.enabled:false}") boolean useRibbon) {
 		super();
@@ -58,19 +57,18 @@ public class CatalogClient {
 
 	protected RestTemplate getRestTemplate() {
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-				false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.registerModule(new Jackson2HalModule());
 
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		converter.setSupportedMediaTypes(Arrays.asList(MediaTypes.HAL_JSON));
 		converter.setObjectMapper(mapper);
 
-		return new RestTemplate(
-				Collections.<HttpMessageConverter<?>> singletonList(converter));
+		return new RestTemplate(Collections.<HttpMessageConverter<?>>singletonList(converter));
 	}
 
-	@HystrixCommand(fallbackMethod = "priceCache", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	@HystrixCommand(fallbackMethod = "priceCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public double price(long itemId) {
 		return getOne(itemId).getPrice();
 	}
@@ -79,10 +77,10 @@ public class CatalogClient {
 		return getOneCache(itemId).getPrice();
 	}
 
-	@HystrixCommand(fallbackMethod = "getItemsCache", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	@HystrixCommand(fallbackMethod = "getItemsCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public Collection<Item> findAll() {
-		PagedResources<Item> pagedResources = restTemplate.getForObject(
-				catalogURL(), ItemPagedResources.class);
+		PagedResources<Item> pagedResources = restTemplate.getForObject(catalogURL(), ItemPagedResources.class);
 		this.itemsCache = pagedResources.getContent();
 		return pagedResources.getContent();
 	}
@@ -95,23 +93,21 @@ public class CatalogClient {
 		String url;
 		if (useRibbon) {
 			ServiceInstance instance = loadBalancer.choose("CATALOG");
-			url = "http://" + instance.getHost() + ":" + instance.getPort()
-					+ "/catalog/";
+			url = String.format("http://%s:%s/catalog", instance.getHost(), instance.getPort());
 		} else {
-			url = "http://" + catalogServiceHost + ":" + catalogServicePort
-					+ "/catalog/";
+			url = String.format("http://%s:%s/catalog", catalogServiceHost, catalogServicePort);
 		}
 		log.trace("Catalog: URL {} ", url);
 		return url;
 	}
 
-	@HystrixCommand(fallbackMethod = "getOneCache", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
+	@HystrixCommand(fallbackMethod = "getOneCache", commandProperties = {
+			@HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "2") })
 	public Item getOne(long itemId) {
 		return restTemplate.getForObject(catalogURL() + itemId, Item.class);
 	}
 
 	public Item getOneCache(long itemId) {
-		return itemsCache.stream().filter(i -> (i.getItemId() == itemId))
-				.findFirst().get();
+		return itemsCache.stream().filter(i -> (i.getItemId() == itemId)).findFirst().get();
 	}
 }
