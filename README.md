@@ -32,7 +32,7 @@ dig @192.168.99.100 -p 8600  order.service.consul. ANY
 dig @192.168.99.100 -p 8600  order.service.consul. SRV
 ```
 
-Note that the demo uses the original []Consul Docker template](https://hub.docker.com/_/consul/) provided
+Note that the demo uses the original [Consul Docker template](https://hub.docker.com/_/consul/) provided
 by Hashicorp. However, the demo does not use a Consul cluster and
 only stores the data in memory i.e. it is certainly not fit for production.
 
