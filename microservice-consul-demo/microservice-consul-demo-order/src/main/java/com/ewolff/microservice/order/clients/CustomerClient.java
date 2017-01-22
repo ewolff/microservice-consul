@@ -39,10 +39,9 @@ public class CustomerClient {
 	}
 
 	@Autowired
-	public CustomerClient(
-			@Value("${customer.service.host:customer}") String customerServiceHost,
+	public CustomerClient(@Value("${customer.service.host:customer}") String customerServiceHost,
 			@Value("${customer.service.port:8080}") long customerServicePort,
-			@Value("${ribbon.eureka.enabled:false}") boolean useRibbon) {
+			@Value("${spring.cloud.consul.ribbon.enabled:false}") boolean useRibbon) {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.customerServiceHost = customerServiceHost;
@@ -58,8 +57,7 @@ public class CustomerClient {
 	public boolean isValidCustomerId(long customerId) {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
-			ResponseEntity<String> entity = restTemplate.getForEntity(
-					customerURL() + customerId, String.class);
+			ResponseEntity<String> entity = restTemplate.getForEntity(customerURL() + customerId, String.class);
 			return entity.getStatusCode().is2xxSuccessful();
 		} catch (final HttpClientErrorException e) {
 			if (e.getStatusCode().value() == 404)
@@ -71,21 +69,19 @@ public class CustomerClient {
 
 	protected RestTemplate getRestTemplate() {
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-				false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.registerModule(new Jackson2HalModule());
 
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		converter.setSupportedMediaTypes(Arrays.asList(MediaTypes.HAL_JSON));
 		converter.setObjectMapper(mapper);
 
-		return new RestTemplate(
-				Collections.<HttpMessageConverter<?>> singletonList(converter));
+		return new RestTemplate(Collections.<HttpMessageConverter<?>>singletonList(converter));
 	}
 
 	public Collection<Customer> findAll() {
-		PagedResources<Customer> pagedResources = getRestTemplate()
-				.getForObject(customerURL(), CustomerPagedResources.class);
+		PagedResources<Customer> pagedResources = getRestTemplate().getForObject(customerURL(),
+				CustomerPagedResources.class);
 		return pagedResources.getContent();
 	}
 
@@ -93,12 +89,9 @@ public class CustomerClient {
 		String url;
 		if (useRibbon) {
 			ServiceInstance instance = loadBalancer.choose("CUSTOMER");
-			url = "http://" + instance.getHost() + ":" + instance.getPort()
-					+ "/customer/";
-
+			url = String.format("http://%s:%s/customer/", instance.getHost(), instance.getPort());
 		} else {
-			url = "http://" + customerServiceHost + ":" + customerServicePort
-					+ "/customer/";
+			url = String.format("http://%s:%s/customer/", customerServiceHost, customerServicePort);
 		}
 		log.trace("Customer: URL {} ", url);
 		return url;
@@ -106,7 +99,6 @@ public class CustomerClient {
 	}
 
 	public Customer getOne(long customerId) {
-		return restTemplate.getForObject(customerURL() + customerId,
-				Customer.class);
+		return restTemplate.getForObject(customerURL() + customerId, Customer.class);
 	}
 }
