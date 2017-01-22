@@ -42,7 +42,7 @@ public class CatalogClient {
 	@Autowired
 	public CatalogClient(@Value("${catalog.service.host:catalog}") String catalogServiceHost,
 			@Value("${catalog.service.port:8080}") long catalogServicePort,
-			@Value("${ribbon.eureka.enabled:false}") boolean useRibbon) {
+			@Value("${spring.cloud.consul.ribbon.enabled:false}") boolean useRibbon) {
 		super();
 		this.restTemplate = getRestTemplate();
 		this.catalogServiceHost = catalogServiceHost;
