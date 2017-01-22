@@ -10,11 +10,11 @@ RUN apt-get install -y -qq libapache2-mod-proxy-html apache2 && \
 
 # Install Consul Templates
 RUN apt-get install -y -qq wget unzip && \
-    wget -nv https://releases.hashicorp.com/consul-template/0.15.0/consul-template_0.15.0_linux_amd64.zip && \
-    unzip consul-template_0.15.0_linux_amd64.zip && \
+    wget -nv https://releases.hashicorp.com/consul-template/0.18.0/consul-template_0.18.0_linux_amd64.zip && \
+    unzip consul-template_0.18.0_linux_amd64.zip && \
     chmod a+x consul-template && \
     mv consul-template /usr/bin/consul-template && \
-    rm consul-template_0.15.0_linux_amd64.zip
+    rm consul-template_0.18.0_linux_amd64.zip
 
 # Install supervisor
 RUN apt-get install -y -qq supervisor
