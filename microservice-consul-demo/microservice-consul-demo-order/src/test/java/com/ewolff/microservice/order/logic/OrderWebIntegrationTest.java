@@ -5,15 +5,16 @@ import com.ewolff.microservice.order.clients.CatalogClient;
 import com.ewolff.microservice.order.clients.Customer;
 import com.ewolff.microservice.order.clients.CustomerClient;
 import com.ewolff.microservice.order.clients.Item;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -23,16 +24,19 @@ import org.springframework.web.util.UriTemplate;
 import java.net.URI;
 import java.util.stream.StreamSupport;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = OrderApp.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = OrderApp.class, webEnvironment = DEFINED_PORT)
 @ActiveProfiles("test")
 public class OrderWebIntegrationTest {
 
 	private RestTemplate restTemplate = new RestTemplate();
 
-	@Value("${server.port}")
+	@LocalServerPort
 	private long serverPort;
 
 	@Autowired

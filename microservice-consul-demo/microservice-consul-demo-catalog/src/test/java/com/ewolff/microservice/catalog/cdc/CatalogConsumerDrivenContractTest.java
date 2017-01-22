@@ -1,24 +1,21 @@
 package com.ewolff.microservice.catalog.cdc;
 
-import static org.junit.Assert.*;
-
-import java.util.Collection;
+import com.ewolff.microservice.catalog.CatalogApp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.ewolff.microservice.catalog.CatalogApp;
+import java.util.Collection;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = CatalogApp.class)
-@IntegrationTest
-@WebAppConfiguration
+import static org.junit.Assert.assertEquals;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = CatalogApp.class, webEnvironment = DEFINED_PORT)
 @ActiveProfiles("test")
 public class CatalogConsumerDrivenContractTest {
 
