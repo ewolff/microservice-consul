@@ -1,39 +1,32 @@
 package com.ewolff.microservice.order.logic;
 
-import static org.junit.Assert.*;
-
-import java.net.URI;
-import java.util.stream.StreamSupport;
-
+import com.ewolff.microservice.order.OrderApp;
+import com.ewolff.microservice.order.clients.CatalogClient;
+import com.ewolff.microservice.order.clients.Customer;
+import com.ewolff.microservice.order.clients.CustomerClient;
+import com.ewolff.microservice.order.clients.Item;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
-import com.ewolff.microservice.order.OrderApp;
-import com.ewolff.microservice.order.clients.CatalogClient;
-import com.ewolff.microservice.order.clients.Customer;
-import com.ewolff.microservice.order.clients.CustomerClient;
-import com.ewolff.microservice.order.clients.Item;
-import com.ewolff.microservice.order.logic.Order;
-import com.ewolff.microservice.order.logic.OrderRepository;
+import java.net.URI;
+import java.util.stream.StreamSupport;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = OrderApp.class)
-@WebAppConfiguration
-@IntegrationTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = OrderApp.class)
 @ActiveProfiles("test")
 public class OrderWebIntegrationTest {
 
