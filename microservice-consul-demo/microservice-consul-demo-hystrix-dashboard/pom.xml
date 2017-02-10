@@ -9,13 +9,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>microservice-consul-demo-turbine-server</artifactId>
+	<artifactId>microservice-consul-demo-hystrix-dashboard</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-turbine</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>

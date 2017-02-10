@@ -33,8 +33,8 @@ services:
      - consul
     ports:
      - "8080:80"
-  turbine:
-    build: ../microservice-consul-demo/microservice-consul-demo-turbine-server
+  hystrix-dashboard:
+    build: ../microservice-consul-demo/microservice-consul-demo-hystrix-dashboard
     links:
      - consul
     ports:
