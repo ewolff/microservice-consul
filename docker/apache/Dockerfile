@@ -16,9 +16,6 @@ RUN apt-get install -y -qq wget unzip && \
     mv consul-template /usr/bin/consul-template && \
     rm consul-template_0.18.0_linux_amd64.zip
 
-# Install supervisor
-RUN apt-get install -y -qq supervisor
-
 # Config Apache
 COPY index.html /var/www/html/index.html
 COPY 000-default.conf  /etc/apache2/sites-enabled/000-default.conf
@@ -26,8 +23,5 @@ COPY 000-default.conf  /etc/apache2/sites-enabled/000-default.conf
 # Config Consul Templates
 COPY 000-default.ctmpl /etc/apache2/sites-enabled/000-default.ctmpl
 
-# Config supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 EXPOSE 80
-CMD /usr/bin/supervisord
+CMD /usr/bin/consul-template -log-level info -consul consul:8500 -template "/etc/apache2/sites-enabled/000-default.ctmpl:/etc/apache2/sites-enabled/000-default.conf:apache2ctl -k graceful"
