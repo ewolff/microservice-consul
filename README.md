@@ -57,9 +57,8 @@ is used for this. It uses a template for the Apache HTTP
 configuration and fills in the IP addresses of the registered services.
 
 The Docker container therefore runs two processes: Apache HTTP and
-Consul Template. To coordinate these [supervisord](http://supervisord.org) is
-used. Running both processes in one Docker container enables Consul Template
-to restart Apache HTTP when new services are registered in the Consul server.
+Consul Template. Consul Template starts Apache httpd and also restarts
+Apache httpd when new services are registered in the Consul server.
 
 Please refer to the subdirectory `apache` to see how this works.
 
@@ -74,11 +73,9 @@ Technologies
   [microservice-demo-order](https://github.com/innoq/microservice-consul/tree/master/microservice-consul-demo/microservice-consul-demo-order) project.
 - [Hystrix](https://github.com/netflix/hystrix) is used for resilience. See `CatalogClient` in
   `com.ewolff.microservice.order.clients` in the microservice-demo-order
-  project . Note that the CustomerClient won't use Hystrix. This way
+  project . Note that the `CustomerClient` won't use Hystrix. This way
   you can see how a crash of the Customer microservices makes the
   Order microservice useless.
-- Hystrix has a dashboard. [Turbine](https://github.com/netflix/Turbine) can be used to combine the data
-from multiple sources i.e. `hystrix.stream`s. **Unfortunately this does not work at the moment.**
 
 
 How To Run
