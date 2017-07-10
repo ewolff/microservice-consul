@@ -62,6 +62,18 @@ Apache httpd when new services are registered in the Consul server.
 
 Please refer to the subdirectory `apache` to see how this works.
 
+Prometheus
+----------
+
+[Prometheus](https://prometheus.io/) is a monitoring system. The code
+of the
+[microservice-consul-demo-order](microservice-consul-demo-order) project
+includes code to export metrics to Prometheus in
+`com.ewolff.microservice.order.prometheus`. Also the docker-compose
+configuration in `docker-compose-prometheus.yml` includes a Prometheus
+instance. It will listen on port 9090 on the Docker host. That way you
+can monitor the application.
+
 
 Technologies
 ------------
@@ -93,9 +105,9 @@ The servers for the infrastructure components are pretty simple thanks to Spring
 
 The microservices are:
 
-- microservice-consul-demo-catalog is the application to take care of items.
-- microserivce-consul-demo-customer is responsible for customers.
-- microservice-consul-demo-order does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
+- [microservice-consul-demo-catalog|(microservice-consul-demo-catalog) is the application to take care of items.
+- [microserivce-consul-demo-customer](microserivce-consul-demo-customer) is responsible for customers.
+- [microservice-consul-demo-order](microservice-consul-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
 
 
 The microservices have a Java main application in `src/test/java` to run them stand alone. `microservice-demo-order` uses a stub for the other services then. Also there are tests that use _consumer-driven contracts_. That is why it is ensured that the services provide the correct interface. These CDC tests are used in microservice-demo-order to verify the stubs. In `microservice-demo-customer` and `microserivce-demo-catalog` they are used to verify the implemented REST services.
