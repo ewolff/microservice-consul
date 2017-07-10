@@ -1,0 +1,49 @@
+version: '2'
+services:
+  consul:
+    image: consul:0.7.2
+    command: consul agent -dev -client 0.0.0.0
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+  customer:
+    build: ../microservice-consul-demo/microservice-consul-demo-customer
+    links:
+     - consul
+    environment:
+      # Note how easily we can overwrite Spring Boot's configuration parameters from the application.properties file via environment variables
+      SPRING_CLOUD_CONSUL_HOST: consul
+  catalog:
+    build: ../microservice-consul-demo/microservice-consul-demo-catalog
+    links:
+     - consul
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul
+  order:
+    build: ../microservice-consul-demo/microservice-consul-demo-order
+    links:
+     - consul
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul
+  apache:
+    build: apache
+    links:
+     - consul
+    depends_on:
+     - consul
+    ports:
+     - "8080:80"
+  prometheus:
+    build: prometheus
+    links:
+     - order
+    ports:
+     - "9090:9090"
+  hystrix-dashboard:
+    build: ../microservice-consul-demo/microservice-consul-demo-hystrix-dashboard
+    links:
+     - consul
+    ports:
+      - "8989:8989"
+
+
