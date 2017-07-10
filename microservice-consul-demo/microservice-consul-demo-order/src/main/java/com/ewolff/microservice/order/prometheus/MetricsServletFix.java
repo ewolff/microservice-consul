@@ -19,6 +19,7 @@ import io.prometheus.client.exporter.common.TextFormat;
 
 /**
  * The original MetricServlet duplicates metrics. This is a hacky workaround.
+ * See https://github.com/prometheus/client_java/issues/130
  *
  */
 public class MetricsServletFix extends HttpServlet {
