@@ -72,8 +72,29 @@ includes code to export metrics to Prometheus in
 `com.ewolff.microservice.order.prometheus`. Also the docker-compose
 configuration in `docker-compose-prometheus.yml` includes a Prometheus
 instance. It will listen on port 9090 on the Docker host. That way you
-can monitor the application.
+can monitor the application. Run it with `docker-compose -f
+docker-compose-prometheus.yml up -d`.
 
+Elastic Stack
+-----------
+
+The [Elastic Stack](https://www.elastic.co/de/products) provides a set
+of tools to handle log data. The projects contain a Logback
+configuration in `logback-spring.xml` so that the services log JSON
+formatted data.
+
+The docker-compose
+configuration in `docker-compose-elastic.yml` includes
+
+* Filebeat to ship the log from a common volume to Elasticsearch.
+
+* Elasticsearch to store and analyse the logs.
+
+* Kibana to analyse the logs. You can access it on port 5601 e.g. at
+<http://localhost:5601>. The indices are called `filebeat-*`.
+
+You can run the configuration with `docker-compose -f
+docker-compose-prometheus.yml up -d`.
 
 Technologies
 ------------
