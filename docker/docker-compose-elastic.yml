@@ -1,0 +1,71 @@
+version: '2'
+volumes:
+  log:
+services:
+  consul:
+    image: consul:0.7.2
+    command: consul agent -dev -client 0.0.0.0
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+  customer:
+    build: ../microservice-consul-demo/microservice-consul-demo-customer
+    links:
+     - consul
+    volumes:
+     - log:/log
+    environment:
+      # Note how easily we can overwrite Spring Boot's configuration parameters from the application.properties file via environment variables
+      SPRING_CLOUD_CONSUL_HOST: consul
+  catalog:
+    build: ../microservice-consul-demo/microservice-consul-demo-catalog
+    links:
+     - consul
+    volumes:
+     - log:/log
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul
+  order:
+    build: ../microservice-consul-demo/microservice-consul-demo-order
+    links:
+     - consul
+    volumes:
+     - log:/log
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: consul
+  filebeat:
+    build: filebeat
+    volumes:
+     - log:/log    
+    links:
+      - elasticsearch
+  elasticsearch:
+    build: elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.5.0
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+  apache:
+    build: apache
+    links:
+     - consul
+    depends_on:
+     - consul
+    ports:
+     - "8080:80"
+  hystrix-dashboard:
+    build: ../microservice-consul-demo/microservice-consul-demo-hystrix-dashboard
+    links:
+     - consul
+    ports:
+      - "8989:8989"
+
+

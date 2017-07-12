@@ -1,0 +1,11 @@
+filebeat.prospectors:
+- input_type: log
+  paths:
+    - /log/*.json
+  json:
+    keys_under_root: true
+
+output.elasticsearch:
+  hosts:
+    - elasticsearch:9200
+  index: "filebeat-%{[service]:unknown-service}-%{+yyyy.MM.dd}"
