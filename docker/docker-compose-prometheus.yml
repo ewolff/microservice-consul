@@ -10,21 +10,14 @@ services:
     build: ../microservice-consul-demo/microservice-consul-demo-customer
     links:
      - consul
-    environment:
-      # Note how easily we can overwrite Spring Boot's configuration parameters from the application.properties file via environment variables
-      SPRING_CLOUD_CONSUL_HOST: consul
   catalog:
     build: ../microservice-consul-demo/microservice-consul-demo-catalog
     links:
      - consul
-    environment:
-      SPRING_CLOUD_CONSUL_HOST: consul
   order:
     build: ../microservice-consul-demo/microservice-consul-demo-order
     links:
      - consul
-    environment:
-      SPRING_CLOUD_CONSUL_HOST: consul
   apache:
     build: apache
     links:
