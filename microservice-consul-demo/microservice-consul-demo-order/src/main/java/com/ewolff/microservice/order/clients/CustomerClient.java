@@ -41,9 +41,10 @@ public class CustomerClient {
 	@Autowired
 	public CustomerClient(@Value("${customer.service.host:customer}") String customerServiceHost,
 			@Value("${customer.service.port:8080}") long customerServicePort,
-			@Value("${spring.cloud.consul.ribbon.enabled:false}") boolean useRibbon) {
+			@Value("${spring.cloud.consul.ribbon.enabled:false}") boolean useRibbon,
+			@Autowired RestTemplate restTemplate) {
 		super();
-		this.restTemplate = getRestTemplate();
+		this.restTemplate = restTemplate;
 		this.customerServiceHost = customerServiceHost;
 		this.customerServicePort = customerServicePort;
 		this.useRibbon = useRibbon;

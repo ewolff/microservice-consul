@@ -94,7 +94,26 @@ configuration in `docker-compose-elastic.yml` includes
 <http://localhost:5601>. The indices are called `filebeat-*`.
 
 You can run the configuration with `docker-compose -f
-docker-compose-prometheus.yml up -d`.
+docker-compose-elastic.yml up -d`.
+
+Zipkin
+-----
+
+[Zipkin](http://zipkin.io/) is a tool to trace calls across
+microservices. The project includes all necessary libraries to provide
+traces.
+
+The docker-compose
+configuration in `docker-compose-zipkin.yml` includes
+
+* A Zipkin server to store and display the data.  You can access it on
+port 9411 e.g. at <http://localhost:9411>.
+
+* Microservices are configured to provide trace information.
+
+You can run the configuration with `docker-compose -f
+docker-compose-zipkin.yml up -d`.
+
 
 Technologies
 ------------
