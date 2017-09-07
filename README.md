@@ -1,7 +1,7 @@
 Microservice Consul Sample
 ===================
 
-[Deutsche Anleitung zum Starten des Beispiels] (WIE-LAUFEN.md)
+[Deutsche Anleitung zum Starten des Beispiels](WIE-LAUFEN.md)
 
 
 This sample is like the sample for my Microservices Book
