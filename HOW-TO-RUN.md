@@ -73,7 +73,7 @@ doubt: delete the file.
 
 ## Run the containers
 
-First you need to build the Docker containers. Change to the directory
+First you need to build the Docker images. Change to the directory
 `docker` and run `docker-compose build`. This will download some base
 images, install software into Docker images and will therefore take
 its time:
@@ -90,7 +90,7 @@ Successfully built 9cfa7772986f
 Successfully tagged msconsul_hystrix-dashboard:latest
 ```
 
-Afterwards the Docker images should be created. They have the prefix
+Afterwards the Docker images should have been created. They have the prefix
 `msconsul`:
 
 ```
@@ -147,11 +147,13 @@ CONTAINER ID        IMAGE                        COMMAND                  CREATE
 15968668c5e8        msconsul_hystrix-dashboard   "/bin/sh -c '/usr/..."   4 minutes ago       Up 4 minutes        0.0.0.0:8989->8989/tcp                                                                             msconsul_hystrix-dashboard_1
 c28d2a38f657        consul:0.7.2                 "docker-entrypoint..."   4 minutes ago       Up 4 minutes        8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1
 ```
-`docker ps -a`  also shows the terminated Docker containers.
+`docker ps -a`  also shows the terminated Docker containers. That is
+useful to see Docker containers that crashed rigth after they started.
 
-If one of the containers is missing, you can look at its logs using
+If one of the containers is not running, you can look at its logs using
 e.g.  `docker logs msconsul_apache_1`. The name of the container is
-given in the last column. This even works after the container has been
+given in the last column of the output of `docker ps`. Looking at the
+logs even works after the container has been
 terminated. If the log says that the container has been `killed`, you
 need to increase the RAM assigned to Docker to e.g. 4GB. On Windows
 and macOS you can find the RAM setting in the Docker application under
@@ -166,9 +168,9 @@ You can terminate all containers using `docker-compose down`.
 ## Run the Elastic example
 
 There is also a configuration of the example that includes an Elastic
-stack to do log analysis. To build the containers use `docker-compose
--f docker-compose-elastic.yml build`. This should result in 7
-containers:
+stack to do log analysis. To build the images, use `docker-compose
+-f docker-compose-elastic.yml build`. This should result in seven
+images:
 
 ```
 [~/microservice-consul/docker]docker-compose -f docker-compose-elastic.yml build
@@ -221,7 +223,7 @@ Creating msconsul_kibana_1
 Recreating msconsul_catalog_1 ... done
 ```
 
-Afterwards 9 containers should be running:
+Afterwards, nine containers should be running:
 
 ```
 [~/microservice-consul/docker]docker ps
@@ -245,10 +247,11 @@ docker-compose-elastic.yml down`.
 ## Run the Prometheus example
 
 Prometheus is a tool to monitor applications. There is a separate
-Docker Compose configuration for this setup.
-To build the containers use `docker-compose
--f docker-compose-prometheus.yml build`. This should result in 5
-containers:
+Docker Compose configuration for a microservices setup that includes
+Prometheus.
+To build the images  use `docker-compose
+-f docker-compose-prometheus.yml build`. This should result in five
+images:
 
 ```
 [~/microservice-consul/docker]docker-compose -f docker-compose-prometheus.yml build
@@ -304,14 +307,14 @@ docker-compose-prometheus.yml down`.
 ## Run the Zipkin example
 
 Zipkin is a tool to trace calls across multiple microservices. To
-build the containers:
+build the images:
 
 ```
 [~/microservice-consul/docker]docker-compose -f docker-compose-zipkin.yml build
 ...
 ```
 
-The result will be 5 Docker images:
+The result will be five Docker images:
 
 ```
 [~/microservice-consul/docker]docker images
