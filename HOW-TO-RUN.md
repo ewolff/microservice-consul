@@ -4,11 +4,6 @@ This is a step-by-step guide how to run the example:
 
 ## Installation
 
-* You need to install `git`, see
-  https://git-scm.com/book/en/v2/Getting-Started-Installing-Git . If
-  the installation was successful, you should be able to execute `git`
-  on the command line.
-  
 * The example is implemented in Java. See
    https://www.java.com/en/download/help/download_options.xml . The
    examples need to be compiled so you need to install a JDK (Java
