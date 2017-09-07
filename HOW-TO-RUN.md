@@ -93,7 +93,6 @@ Step 4/4 : EXPOSE 8989
 Removing intermediate container 11e7fbacfa01
 Successfully built 9cfa7772986f
 Successfully tagged msconsul_hystrix-dashboard:latest
-[~/microservice-consul/docker]
 ```
 
 Afterwards the Docker images should be created. They have the prefix
@@ -107,7 +106,6 @@ msconsul_order               latest              12b279e78975        52 seconds 
 msconsul_apache              latest              22fac099ba93        55 seconds ago      255MB
 msconsul_catalog             latest              c23c535ecaf6        2 minutes ago       225MB
 msconsul_customer            latest              a780e4f49bac        2 minutes ago       225MB
-
 ```
 
 Now you can start the containers using `docker-compose up -d`. The
@@ -138,7 +136,6 @@ Creating msconsul_order_1
 Creating msconsul_catalog_1
 Creating msconsul_apache_1
 Creating msconsul_apache_1 ... done
-[wolff@TeraMacBook:~/microservice-consul/docker]
 ```
 
 As you can see the Consul Docker image is downloaded now.
@@ -154,7 +151,6 @@ CONTAINER ID        IMAGE                        COMMAND                  CREATE
 144542583a05        msconsul_catalog             "/bin/sh -c '/usr/..."   4 minutes ago       Up 4 minutes        8080/tcp                                                                                           msconsul_catalog_1
 15968668c5e8        msconsul_hystrix-dashboard   "/bin/sh -c '/usr/..."   4 minutes ago       Up 4 minutes        0.0.0.0:8989->8989/tcp                                                                             msconsul_hystrix-dashboard_1
 c28d2a38f657        consul:0.7.2                 "docker-entrypoint..."   4 minutes ago       Up 4 minutes        8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1
-[~/microservice-consul/docker]
 ```
 `docker ps -a`  also shows the terminated Docker containers.
 
@@ -229,6 +225,7 @@ Creating msconsul_filebeat_1 ...
 Creating msconsul_kibana_1
 Recreating msconsul_catalog_1 ... done
 ```
+
 Afterwards 9 containers should be running:
 
 ```
@@ -269,7 +266,6 @@ msconsul_order                                  latest              12b279e78975
 msconsul_apache                                 latest              22fac099ba93        34 minutes ago       255MB
 msconsul_catalog                                latest              c23c535ecaf6        36 minutes ago       225MB
 msconsul_customer                               latest              a780e4f49bac        36 minutes ago       225MB
-[wolff@TeraMacBook:~/microservice-consul/docker]
 ``` 
 
 You can run the containers then:
