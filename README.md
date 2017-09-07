@@ -136,6 +136,8 @@ How To Run
 The demo can be run with [Docker Machine and Docker
 Compose](docker/README.md) via `docker-compose up`
 
+See [How to run](HOW-TO-RUN.md) for details.
+
 Remarks on the Code
 -------------------
 
