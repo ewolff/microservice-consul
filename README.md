@@ -150,7 +150,7 @@ The servers for the infrastructure components are pretty simple thanks to Spring
 
 The microservices are:
 
-- [microservice-consul-demo-catalog|(microservice-consul-demo-catalog) is the application to take care of items.
+- [microservice-consul-demo-catalog](microservice-consul-demo-catalog) is the application to take care of items.
 - [microserivce-consul-demo-customer](microserivce-consul-demo-customer) is responsible for customers.
 - [microservice-consul-demo-order](microservice-consul-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
 
