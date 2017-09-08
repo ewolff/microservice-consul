@@ -176,6 +176,10 @@ Container starten. Beispielsweise mit `docker exec -it
 msconsul_catalog_1 /bin/sh` oder du kannst in dem Container ein
 Kommando mit `docker exec msconsul_catalog_1 /bin/ls` ausführen.
 
+Du kannst auf die Microservices unter http://localhost:8080/
+zugreigen, auf das Hystrix Dashboard unter http://localhost:8989/ und
+auf das Consul Dashboard unter http://localhost:8500 .
+
 Mit `docker-compose down` kannst Du alle Container beenden.
 
 ## Elastic-Beispiel ausführen
@@ -255,6 +259,10 @@ c28d2a38f657        consul:0.7.2                            "docker-entrypoint..
 
 Bei Problemen können die Tipps weiter oben hilfreich sein.
 
+Zusätzlich zu den oben erwähnten URLs kannst du unter
+http://localhost:5601 auf Kibana zugreifen.
+
+
 Du kannst die Container mit `docker-compose -f
 docker-compose-elastic.yml down` wieder herunterfahren.
 
@@ -315,6 +323,9 @@ f18f472e052e        msconsul_apache              "/bin/sh -c '/usr/..."   7 minu
 
 Weiter oben stehen einige Tipps, um Probleme mit den Container zu
 identifizieren und zu begeben.
+
+Zusätzlich zu den oben genannten URLs steht nun unter
+http://localhost:9090 Prometheus zur Verfügung.
 
 Du kannst die Container mit `docker-compose -f
 docker-compose-prometheus.yml down` wieder stopppen.
@@ -386,6 +397,9 @@ a131a0b394f7        msconsul_apache              "/bin/sh -c '/usr/..."   32 sec
 aa45e781dfe2        openzipkin/zipkin:1.28.1     "/bin/sh -c 'test ..."   35 seconds ago      Up 32 seconds       9410/tcp, 0.0.0.0:9411->9411/tcp                                                                   msconsul_zipkin_1
 00b331eb1d22        consul:0.7.2                 "docker-entrypoint..."   35 seconds ago      Up 33 seconds       8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1
 ```
+
+Zusätzlich zu den oben genannten URLs steht nun unter
+http://localhost:9411 Zipkin zur Verfügung.
 
 Mit `docker-compose -f docker-compose-zipkin.yml down` kannst Du die
 Container wieder stoppen.

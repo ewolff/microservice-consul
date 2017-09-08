@@ -166,6 +166,10 @@ If you need to do more trouble shooting open a shell in the container
 using e.g. `docker exec -it msconsul_catalog_1 /bin/sh` or execute
 command using `docker exec msconsul_catalog_1 /bin/ls`.
 
+You can access the microservices at http://localhost:8080/ , the
+Hystrix dashboard on http://localhost:8989/ and the Consul dashboard
+at http://localhost:8500 .
+
 You can terminate all containers using `docker-compose down`.
 
 ## Run the Elastic example
@@ -244,6 +248,9 @@ c28d2a38f657        consul:0.7.2                            "docker-entrypoint..
 
 See above for tips how to trouble shoot the containers if needed.
 
+In addition to the URL mentioned above you can access Kibana at
+http://localhost:5601 .
+
 You can stop the containers using `docker-compose -f
 docker-compose-elastic.yml down`.
 
@@ -303,6 +310,9 @@ f18f472e052e        msconsul_apache              "/bin/sh -c '/usr/..."   7 minu
 ```
 
 See above for tips how to trouble shoot the setup if needed.
+
+In addition to the URL mentioned above you can access Prometheus at
+http://localhost:9090 .
 
 You can stop the containers using `docker-compose -f
 docker-compose-prometheus.yml down`.
@@ -373,6 +383,9 @@ a131a0b394f7        msconsul_apache              "/bin/sh -c '/usr/..."   32 sec
 aa45e781dfe2        openzipkin/zipkin:1.28.1     "/bin/sh -c 'test ..."   35 seconds ago      Up 32 seconds       9410/tcp, 0.0.0.0:9411->9411/tcp                                                                   msconsul_zipkin_1
 00b331eb1d22        consul:0.7.2                 "docker-entrypoint..."   35 seconds ago      Up 33 seconds       8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1
 ```
+
+In addition to the URL mentioned above you can access Prometheus at
+http://localhost:9411 .
 
 You can stop the containers using `docker-compose -f
 docker-compose-zipkin.yml down`.
