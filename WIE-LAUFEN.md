@@ -57,7 +57,7 @@ package`. Das wird einige Zeit dauern:
 [INFO] microservice-consul-demo-order ..................... SUCCESS [ 27.781 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
+[INFO] ------------------------------------------------------- -----------------
 [INFO] Total time: 01:35 min
 [INFO] Finished at: 2017-09-07T18:08:13+02:00
 [INFO] Final Memory: 52M/416M
@@ -70,6 +70,9 @@ Falls es dabei zu Fehlern kommt:
 in deinem Heimatverzeichnis keine Konfiguration für ein spezielles
 Maven Repository enthalten. Im Zweifelsfall kannst du die Datei
 einfach löschen.
+
+* Die Tests nutzen einige Ports auf dem Rechner. Stelle sicher, dass
+  im Hintergrund keine Server laufen.
 
 * Führe die Tests beim Build nicht aus: `mvn clean package package
   -Dmaven.test.skip=true`.
