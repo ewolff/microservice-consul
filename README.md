@@ -17,9 +17,9 @@ containers. The services are implemented in Java using Spring and
 Spring Cloud.
 
 It uses three microservices:
-- `Order` to process orders. (http://localhost:8380 when started locally)
-- `Customer` to handle customer data. (http://localhost:8280)
-- `Catalog` to handle the items in the catalog. (http://localhost:8180)
+- `Order` to process orders. (http://localhost:8080 when started locally)
+- `Customer` to handle customer data. (http://localhost:8080)
+- `Catalog` to handle the items in the catalog. (http://localhost:8080)
 
 Consul
 ------
@@ -35,7 +35,8 @@ dig @192.168.99.100 -p 8600  order.service.consul. ANY
 dig @192.168.99.100 -p 8600  order.service.consul. SRV
 ```
 
-Note that the demo uses the original [Consul Docker template](https://hub.docker.com/_/consul/) provided
+Note that the demo uses the original
+[Consul Docker image](https://hub.docker.com/_/consul/) provided
 by Hashicorp. However, the demo does not use a Consul cluster and
 only stores the data in memory i.e. it is certainly not fit for production.
 
@@ -150,9 +151,9 @@ The servers for the infrastructure components are pretty simple thanks to Spring
 
 The microservices are:
 
-- [microservice-consul-demo-catalog](microservice-consul-demo-catalog) is the application to take care of items.
-- [microserivce-consul-demo-customer](microserivce-consul-demo-customer) is responsible for customers.
-- [microservice-consul-demo-order](microservice-consul-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
+- [microservice-consul-demo-catalog](microservice-consul-demo/microservice-consul-demo-catalog) is the application to take care of items.
+- [microservice-consul-demo-customer](microservice-consul-demo/microservice-consul-demo-customer) is responsible for customers.
+- [microservice-consul-demo-order](microservice-consul-demo/microservice-consul-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
 
 
 The microservices have a Java main application in `src/test/java` to run them stand alone. `microservice-demo-order` uses a stub for the other services then. Also there are tests that use _consumer-driven contracts_. That is why it is ensured that the services provide the correct interface. These CDC tests are used in microservice-demo-order to verify the stubs. In `microservice-demo-customer` and `microserivce-demo-catalog` they are used to verify the implemented REST services.
