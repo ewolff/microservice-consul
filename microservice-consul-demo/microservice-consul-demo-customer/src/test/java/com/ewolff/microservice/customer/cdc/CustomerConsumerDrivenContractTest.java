@@ -7,18 +7,14 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.ewolff.microservice.customer.CustomerApp;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = CustomerApp.class)
-@IntegrationTest
-@WebAppConfiguration
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, classes = CustomerApp.class)
 @ActiveProfiles("test")
 public class CustomerConsumerDrivenContractTest {
 
@@ -36,7 +32,8 @@ public class CustomerConsumerDrivenContractTest {
 								&& c.getEmail().equals(
 										"eberhard.wolff@gmail.com")
 								&& c.getStreet().equals("Unter den Linden") && c
-								.getCity().equals("Berlin"))).count());
+										.getCity().equals("Berlin")))
+						.count());
 	}
 
 	@Test
