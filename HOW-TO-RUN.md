@@ -27,7 +27,7 @@ This is a step-by-step guide how to run the example:
 ## Build
 
 Change to the directory `microservice-consul-demo` and run `./mvnw clean
-package` or `./mvnw.cmd clean package` (Windows). This will take a while:
+package` or `mvnw.cmd clean package` (Windows). This will take a while:
 
 ```
 [~/microservice-consul/microservice-consul-demo]./mvnw clean package
@@ -63,7 +63,7 @@ doubt: delete the file.
 * The tests use some ports on the local machine. Make sure that no
 server runs in the background.
 
-* Skip the tests: `./mvnw clean package package -Dmaven.test.skip=true`.
+* Skip the tests: `./mvnw clean package package -Dmaven.test.skip=true` or `mvnw.cmd clean package package -Dmaven.test.skip=true`.
 
 * In rare cases dependencies might not be downloaded correctly. In
   that case: Remove the directory `repository` in the directory `.m2`
