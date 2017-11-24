@@ -63,7 +63,7 @@ doubt: delete the file.
 * The tests use some ports on the local machine. Make sure that no
 server runs in the background.
 
-* Skip the tests: `./mvnw clean package package -Dmaven.test.skip=true` or `mvnw.cmd clean package package -Dmaven.test.skip=true`.
+* Skip the tests: `./mvnw clean package -Dmaven.test.skip=true` or `mvnw.cmd clean package -Dmaven.test.skip=true`.
 
 * In rare cases dependencies might not be downloaded correctly. In
   that case: Remove the directory `repository` in the directory `.m2`
