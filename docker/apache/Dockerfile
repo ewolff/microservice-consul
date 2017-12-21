@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:16.04
 
 # Update Ubuntu
 RUN apt-get update ; apt-get dist-upgrade -y -qq 
