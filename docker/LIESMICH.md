@@ -1,4 +1,4 @@
-Microservice Demo mit Docker Machine und Dokcer 
+Microservice Demo mit Docker Machine und Docker 
 ============================
 
 Docker Machine kann virtuelle Machine erstellen, auf denen dann Docker
