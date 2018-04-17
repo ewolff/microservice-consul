@@ -16,4 +16,4 @@ scrape_configs:
     scrape_interval: 10s
     metrics_path: '/prometheus'
     static_configs:
-      - targets: ['order:8380']      
+      - targets: ['order:8080']      
