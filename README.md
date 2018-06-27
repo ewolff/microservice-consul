@@ -71,7 +71,7 @@ Prometheus
 
 [Prometheus](https://prometheus.io/) is a monitoring system. The code
 of the
-[microservice-consul-demo-order](microservice-consul-demo-order) project
+[microservice-consul-demo-order](microservice-consul-demo/microservice-consul-demo-order) project
 includes code to export metrics to Prometheus in
 `com.ewolff.microservice.order.prometheus`. Also the docker-compose
 configuration in `docker-compose-prometheus.yml` includes a Prometheus
