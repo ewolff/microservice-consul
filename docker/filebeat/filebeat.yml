@@ -8,4 +8,3 @@ filebeat.prospectors:
 output.elasticsearch:
   hosts:
     - elasticsearch:9200
-  index: "filebeat-%{[service]:unknown-service}-%{+yyyy.MM.dd}"

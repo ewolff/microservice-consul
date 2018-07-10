@@ -39,7 +39,7 @@ services:
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
   kibana:
-    image: docker.elastic.co/kibana/kibana:5.5.0
+    image: docker.elastic.co/kibana/kibana:6.3.1
     ports:
       - 5601:5601
     links:
