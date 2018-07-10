@@ -39,7 +39,7 @@ services:
     ports:
      - "8080:80"
   zipkin:
-    image: openzipkin/zipkin:1.28.1
+    image: openzipkin/zipkin:2.10.1
     ports:
      - "9411:9411"
   hystrix-dashboard:
