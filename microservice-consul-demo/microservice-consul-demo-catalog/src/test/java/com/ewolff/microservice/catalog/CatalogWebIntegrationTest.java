@@ -68,7 +68,7 @@ public class CatalogWebIntegrationTest {
 		String body = getForMediaType(String.class, MediaType.TEXT_HTML, url);
 
 		assertThat(body, containsString("<form"));
-		assertThat(body, containsString("<div>"));
+		assertThat(body, containsString("<div"));
 	}
 
 	@Test
