@@ -14,6 +14,6 @@ scrape_configs:
 
   - job_name: 'order'
     scrape_interval: 10s
-    metrics_path: '/prometheus'
+    metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['order:8080']      
