@@ -32,11 +32,3 @@ services:
      - order
     ports:
      - "9090:9090"
-  hystrix-dashboard:
-    build: ../microservice-consul-demo/microservice-consul-demo-hystrix-dashboard
-    links:
-     - consul
-    ports:
-      - "8989:8989"
-
-

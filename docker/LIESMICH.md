@@ -27,19 +27,6 @@ Das Ergebnis:
 
 - Docker Compose erzeugt die Docker Images und startet sie.
 - Find mit `docker-machine ip dev`die IP address der vrituellen Maschine
-- Eine VirtualBox VM wird von Vagrant gestartet
-- Docker wird in der VM gestartet
 - Die Anwendung steht unter http://ipadresss:8080/ zur
   Verfügung. Dort gibt es auch eine Seite mit Links zu den anderen
   Diensten.
-- Das Eureka-Dashboard steht unter http://ipadress:8761/ zur Verfügung.
-- Das Hystrix-Dashboard steht unter http://ipadress:8080/turbine/hystrix zur
-  Verfügung. Die URL für einen einzelnen Order-Server dort lautet
-  http://172.17.0.9:8080/hystrix.stream - wobei die IP-Adresse sich
-  ändert. Sie kann im Eureka-Dashboard für den Dienst order-app
-  ermittelt werden. Die Alternative ist der Turbine Stream des Order
-  Services. Er enthält die Daten aller Order-Servives. Dazu muss die Adresse
-  http://172.17.0.10:8989/turbine.stream?cluster=ORDER der Order App genutzt werden -
-  wobei die IP-Adresse des Turbine Service sich aus dem Eureka Dashboard
-  entnehmen lässt.
-- Nutze `docker-machine rm dev`, um die virtuelle Maschine wieder zu zerstören.

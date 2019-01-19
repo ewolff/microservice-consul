@@ -41,7 +41,6 @@ package` or `mvnw.cmd clean package` (Windows). This will take a while:
 [INFO] Reactor Summary:
 [INFO] 
 [INFO] microservice-consul-demo ........................... SUCCESS [  1.401 s]
-[INFO] microservice-consul-demo-hystrix-dashboard ......... SUCCESS [  3.601 s]
 [INFO] microservice-consul-demo-customer .................. SUCCESS [ 25.636 s]
 [INFO] microservice-consul-demo-catalog ................... SUCCESS [ 36.618 s]
 [INFO] microservice-consul-demo-order ..................... SUCCESS [ 27.781 s]
@@ -86,7 +85,6 @@ Step 4/4 : EXPOSE 8989
  ---> 9cfa7772986f
 Removing intermediate container 11e7fbacfa01
 Successfully built 9cfa7772986f
-Successfully tagged msconsul_hystrix-dashboard:latest
 ```
 
 Afterwards the Docker images should have been created. They have the prefix
@@ -95,7 +93,6 @@ Afterwards the Docker images should have been created. They have the prefix
 ```
 [~/microservice-consul/docker]docker images
 REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
-msconsul_hystrix-dashboard   latest              9cfa7772986f        49 seconds ago      197MB
 msconsul_order               latest              12b279e78975        52 seconds ago      225MB
 msconsul_apache              latest              22fac099ba93        55 seconds ago      255MB
 msconsul_catalog             latest              c23c535ecaf6        2 minutes ago       225MB
@@ -123,9 +120,7 @@ Creating msconsul_consul_1 ... done
 Creating msconsul_order_1 ... 
 Creating msconsul_catalog_1 ... 
 Creating msconsul_customer_1 ... 
-Creating msconsul_hystrix-dashboard_1 ... 
 Creating msconsul_apache_1 ... 
-Creating msconsul_hystrix-dashboard_1
 Creating msconsul_order_1
 Creating msconsul_catalog_1
 Creating msconsul_apache_1
@@ -143,7 +138,6 @@ CONTAINER ID        IMAGE                        COMMAND                  CREATE
 948f2576b0b0        msconsul_customer            "/bin/sh -c '/usr/..."   4 minutes ago       Up 4 minutes        8080/tcp                                                                                           msconsul_customer_1
 0574e8dc5b11        msconsul_order               "/bin/sh -c '/usr/..."   4 minutes ago       Up 4 minutes        8080/tcp                                                                                           msconsul_order_1
 144542583a05        msconsul_catalog             "/bin/sh -c '/usr/..."   4 minutes ago       Up 4 minutes        8080/tcp                                                                                           msconsul_catalog_1
-15968668c5e8        msconsul_hystrix-dashboard   "/bin/sh -c '/usr/..."   4 minutes ago       Up 4 minutes        0.0.0.0:8989->8989/tcp                                                                             msconsul_hystrix-dashboard_1
 c28d2a38f657        consul:0.7.2                 "docker-entrypoint..."   4 minutes ago       Up 4 minutes        8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1
 ```
 `docker ps -a`  also shows the terminated Docker containers. That is
@@ -162,8 +156,8 @@ If you need to do more trouble shooting open a shell in the container
 using e.g. `docker exec -it msconsul_catalog_1 /bin/sh` or execute
 command using `docker exec msconsul_catalog_1 /bin/ls`.
 
-You can access the microservices at http://localhost:8080/ , the
-Hystrix dashboard on http://localhost:8989/ and the Consul dashboard
+You can access the microservices at http://localhost:8080/ 
+ and the Consul dashboard
 at http://localhost:8500 .
 
 You can terminate all containers using `docker-compose down`.
@@ -182,7 +176,6 @@ images:
 REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
 msconsul_filebeat                               latest              fbf4012cc9f8        8 seconds ago       271MB
 msconsul_elasticsearch                          latest              616ec15fe41c        22 seconds ago      510MB
-msconsul_hystrix-dashboard                      latest              9cfa7772986f        24 minutes ago      197MB
 msconsul_order                                  latest              12b279e78975        24 minutes ago      225MB
 msconsul_apache                                 latest              22fac099ba93        24 minutes ago      255MB
 msconsul_catalog                                latest              c23c535ecaf6        26 minutes ago      225MB
@@ -210,7 +203,6 @@ dd0a3fa6a4e6: Pull complete
 Digest: sha256:ad076204edd4834ab78b219414e694cc4ca1bd9956dcfe21c73deee7d727da2e
 Status: Downloaded newer image for docker.elastic.co/kibana/kibana:5.5.0
 msconsul_consul_1 is up-to-date
-msconsul_hystrix-dashboard_1 is up-to-date
 Recreating msconsul_catalog_1 ... 
 Recreating msconsul_customer_1 ... 
 Recreating msconsul_catalog_1
@@ -238,7 +230,6 @@ a2e12faa921a        msconsul_filebeat                       "filebeat -e"       
 2133f927417a        docker.elastic.co/kibana/kibana:5.5.0   "/bin/sh -c /usr/l..."   24 seconds ago      Up 22 seconds       0.0.0.0:5601->5601/tcp                                                                             msconsul_kibana_1
 de65adc63bc4        msconsul_elasticsearch                  "/bin/bash bin/es-..."   25 seconds ago      Up 23 seconds       9200/tcp, 9300/tcp                                                                                 msconsul_elasticsearch_1
 2697aa91700b        msconsul_apache                         "/bin/sh -c '/usr/..."   24 minutes ago      Up 24 minutes       0.0.0.0:8080->80/tcp                                                                               msconsul_apache_1
-15968668c5e8        msconsul_hystrix-dashboard              "/bin/sh -c '/usr/..."   24 minutes ago      Up 24 minutes       0.0.0.0:8989->8989/tcp                                                                             msconsul_hystrix-dashboard_1
 c28d2a38f657        consul:0.7.2                            "docker-entrypoint..."   24 minutes ago      Up 24 minutes       8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1
 ```
 
@@ -265,7 +256,6 @@ images:
 [~/microservice-consul/docker]docker images
 REPOSITORY                                      TAG                 IMAGE ID            CREATED              SIZE
 msconsul_prometheus                             latest              20eec31db30c        About a minute ago   74.5MB
-msconsul_hystrix-dashboard                      latest              9cfa7772986f        34 minutes ago       197MB
 msconsul_order                                  latest              12b279e78975        34 minutes ago       225MB
 msconsul_apache                                 latest              22fac099ba93        34 minutes ago       255MB
 msconsul_catalog                                latest              c23c535ecaf6        36 minutes ago       225MB
@@ -279,11 +269,9 @@ You can run the containers then:
 Creating msconsul_consul_1 ... 
 Creating msconsul_consul_1 ... done
 Creating msconsul_catalog_1 ... 
-Creating msconsul_hystrix-dashboard_1 ... 
 Creating msconsul_apache_1 ... 
 Creating msconsul_order_1 ... 
 Creating msconsul_customer_1 ... 
-Creating msconsul_hystrix-dashboard_1
 Creating msconsul_apache_1
 Creating msconsul_customer_1
 Creating msconsul_order_1
@@ -301,7 +289,6 @@ ef4283b672a1        msconsul_prometheus          "/bin/prometheus -..."   7 minu
 a51a85f2bd95        msconsul_order               "/bin/sh -c '/usr/..."   7 minutes ago       Up 7 minutes        8080/tcp                                                                                           msconsul_order_1
 de6443eb8885        msconsul_customer            "/bin/sh -c '/usr/..."   7 minutes ago       Up 7 minutes        8080/tcp                                                                                           msconsul_customer_1
 f18f472e052e        msconsul_apache              "/bin/sh -c '/usr/..."   7 minutes ago       Up 7 minutes        0.0.0.0:8080->80/tcp                                                                               msconsul_apache_1
-16ee4f80a841        msconsul_hystrix-dashboard   "/bin/sh -c '/usr/..."   7 minutes ago       Up 7 minutes        0.0.0.0:8989->8989/tcp                                                                             msconsul_hystrix-dashboard_1
 818e33f41c43        consul:0.7.2                 "docker-entrypoint..."   7 minutes ago       Up 7 minutes        8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1
 ```
 
@@ -328,7 +315,6 @@ The result will be five Docker images:
 ```
 [~/microservice-consul/docker]docker images
 REPOSITORY                                      TAG                 IMAGE ID            CREATED             SIZE
-msconsul_hystrix-dashboard                      latest              9cfa7772986f        About an hour ago   197MB
 msconsul_order                                  latest              12b279e78975        About an hour ago   225MB
 msconsul_apache                                 latest              22fac099ba93        About an hour ago   255MB
 msconsul_catalog                                latest              c23c535ecaf6        About an hour ago   225MB
@@ -353,13 +339,11 @@ Creating msconsul_zipkin_1 ...
 Creating msconsul_consul_1 ... 
 Creating msconsul_zipkin_1
 Creating msconsul_consul_1 ... done
-Creating msconsul_hystrix-dashboard_1 ... 
 Creating msconsul_zipkin_1 ... done
 Creating msconsul_catalog_1 ... 
 Creating msconsul_order_1 ... 
 Creating msconsul_customer_1 ... 
 Creating msconsul_apache_1
-Creating msconsul_hystrix-dashboard_1
 Creating msconsul_customer_1
 Creating msconsul_order_1
 Creating msconsul_customer_1 ... done
@@ -374,7 +358,6 @@ CONTAINER ID        IMAGE                        COMMAND                  CREATE
 4cc5728d5e10        msconsul_catalog             "/bin/sh -c '/usr/..."   32 seconds ago      Up 28 seconds       8080/tcp                                                                                           msconsul_catalog_1
 4193b99d3e04        msconsul_customer            "/bin/sh -c '/usr/..."   32 seconds ago      Up 27 seconds       8080/tcp                                                                                           msconsul_customer_1
 1e8fb642a9cb        msconsul_order               "/bin/sh -c '/usr/..."   32 seconds ago      Up 28 seconds       8080/tcp                                                                                           msconsul_order_1
-7020a4c0ab87        msconsul_hystrix-dashboard   "/bin/sh -c '/usr/..."   32 seconds ago      Up 30 seconds       0.0.0.0:8989->8989/tcp                                                                             msconsul_hystrix-dashboard_1
 a131a0b394f7        msconsul_apache              "/bin/sh -c '/usr/..."   32 seconds ago      Up 30 seconds       0.0.0.0:8080->80/tcp                                                                               msconsul_apache_1
 aa45e781dfe2        openzipkin/zipkin:1.28.1     "/bin/sh -c 'test ..."   35 seconds ago      Up 32 seconds       9410/tcp, 0.0.0.0:9411->9411/tcp                                                                   msconsul_zipkin_1
 00b331eb1d22        consul:0.7.2                 "docker-entrypoint..."   35 seconds ago      Up 33 seconds       8300-8302/tcp, 8400/tcp, 8600/tcp, 8301-8302/udp, 0.0.0.0:8500->8500/tcp, 0.0.0.0:8600->8600/udp   msconsul_consul_1

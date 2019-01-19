@@ -32,14 +32,5 @@ The result should be:
 - Docker Compose builds the Docker images and runs them.
 - Use `docker-machine ip dev` to find the IP adress of the virtual machine.
 - You can access the application at http://ipadresss:8080/ . It has a
-web page with links to all other services, the Consul dashboard and
-the Hystrix dashboard.
-- You can access the Turbine dashboard by follwing the link on the
-page. The URL for the data stream of all Hystrix data of all Order
-nodes is http://172.17.0.10:8989/turbine.stream?cluster=ORDER - the
-IP-Adresse changes. Look it up in the Eureka dashboard for service
-turbine. You can also connect to a Hystrix stream of an order service.
-You need to use the address http://172.17.0.9:8080/hystrix.stream of
-the Order App. The IP address can be found in the Eureka dashboard.
-
+web page with links to all other services and the Consul dashboard,
 - Use `docker-machine rm dev` to destroy the virtual machine.

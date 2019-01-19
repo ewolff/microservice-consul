@@ -15,7 +15,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>microservice-consul-demo-hystrix-dashboard</module>
 		<module>microservice-consul-demo-customer</module>
 		<module>microservice-consul-demo-catalog</module>
 		<module>microservice-consul-demo-order</module>

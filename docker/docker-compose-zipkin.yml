@@ -42,11 +42,3 @@ services:
     image: openzipkin/zipkin:2.10.1
     ports:
      - "9411:9411"
-  hystrix-dashboard:
-    build: ../microservice-consul-demo/microservice-consul-demo-hystrix-dashboard
-    links:
-     - consul
-    ports:
-      - "8989:8989"
-
-

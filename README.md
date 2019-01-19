@@ -127,11 +127,6 @@ Technologies
 - [Ribbon](https://github.com/netflix/Ribbon) for client-side Load Balancing. See the classes `CatalogClient` and
   `CustomerClient` in the package `com.ewolff.microservice.order.clients` in the
   [microservice-demo-order](https://github.com/innoq/microservice-consul/tree/master/microservice-consul-demo/microservice-consul-demo-order) project.
-- [Hystrix](https://github.com/netflix/hystrix) is used for resilience. See `CatalogClient` in
-  `com.ewolff.microservice.order.clients` in the microservice-demo-order
-  project . Note that the `CustomerClient` won't use Hystrix. This way
-  you can see how a crash of the Customer microservices makes the
-  Order microservice useless.
 
 
 How To Run
@@ -147,13 +142,11 @@ Remarks on the Code
 
 The servers for the infrastructure components are pretty simple thanks to Spring Cloud:
 
-- microservice-consul-demo-turbine can be used to consolidate the Hystrix metrics and has a Hystrix dashboard.
-
 The microservices are:
 
 - [microservice-consul-demo-catalog](microservice-consul-demo/microservice-consul-demo-catalog) is the application to take care of items.
 - [microservice-consul-demo-customer](microservice-consul-demo/microservice-consul-demo-customer) is responsible for customers.
-- [microservice-consul-demo-order](microservice-consul-demo/microservice-consul-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing and Hystrix for resilience.
+- [microservice-consul-demo-order](microservice-consul-demo/microservice-consul-demo-order) does order processing. It uses microservice-demo-catalog and microservice-demo-customer. Ribbon is used for load balancing.
 
 
 The microservices have a Java main application in `src/test/java` to run them stand alone. `microservice-demo-order` uses a stub for the other services then. Also there are tests that use _consumer-driven contracts_. That is why it is ensured that the services provide the correct interface. These CDC tests are used in microservice-demo-order to verify the stubs. In `microservice-demo-customer` and `microserivce-demo-catalog` they are used to verify the implemented REST services.
