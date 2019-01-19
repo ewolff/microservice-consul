@@ -35,7 +35,6 @@ public class CatalogClient {
 	private long catalogServicePort;
 	private boolean useRibbon;
 	private LoadBalancerClient loadBalancer;
-	private Collection<Item> itemsCache = null;
 
 	@Autowired
 	public CatalogClient(@Value("${catalog.service.host:catalog}") String catalogServiceHost,
@@ -72,7 +71,6 @@ public class CatalogClient {
 
 	public Collection<Item> findAll() {
 		PagedResources<Item> pagedResources = restTemplate.getForObject(catalogURL(), ItemPagedResources.class);
-		this.itemsCache = pagedResources.getContent();
 		return pagedResources.getContent();
 	}
 
@@ -80,9 +78,9 @@ public class CatalogClient {
 		String url;
 		if (useRibbon) {
 			ServiceInstance instance = loadBalancer.choose("CATALOG");
-			url = String.format("http://%s:%s/catalog", instance.getHost(), instance.getPort());
+			url = String.format("http://%s:%s/catalog/", instance.getHost(), instance.getPort());
 		} else {
-			url = String.format("http://%s:%s/catalog", catalogServiceHost, catalogServicePort);
+			url = String.format("http://%s:%s/catalog/", catalogServiceHost, catalogServicePort);
 		}
 		log.trace("Catalog: URL {} ", url);
 		return url;

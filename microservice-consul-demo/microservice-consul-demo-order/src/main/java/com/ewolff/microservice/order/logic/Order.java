@@ -72,9 +72,9 @@ class Order {
 		return orderLine.size();
 	}
 
-	public double totalPrice(CatalogClient itemClient) {
+	public double totalPrice(CatalogClient catalogClient) {
 		return orderLine.stream()
-				.map((ol) -> ol.getCount() * itemClient.price(ol.getItemId()))
+				.map((ol) -> ol.getCount() * catalogClient.price(ol.getItemId()))
 				.reduce(0.0, (d1, d2) -> d1 + d2);
 	}
 
