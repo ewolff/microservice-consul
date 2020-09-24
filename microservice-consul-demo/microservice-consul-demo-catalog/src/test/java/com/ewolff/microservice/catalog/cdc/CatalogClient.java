@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.hal.Jackson2HalModule;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.mediatype.hal.Jackson2HalModule;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class CatalogClient {
 
-	public static class ItemPagedResources extends PagedResources<Item> {
+	public static class ItemPagedResources extends PagedModel<Item> {
 	}
 
 	private final RestTemplate restTemplate;
@@ -32,8 +32,7 @@ public class CatalogClient {
 	private LoadBalancerClient loadBalancer;
 
 	@Autowired
-	public CatalogClient(
-			@Value("${catalog.service.host:catalog}") String catalogServiceHost,
+	public CatalogClient(@Value("${catalog.service.host:catalog}") String catalogServiceHost,
 			@Value("${catalog.service.port:8080}") long catalogServicePort,
 			@Value("${ribbon.eureka.enabled:false}") boolean useRibbon) {
 		super();
@@ -50,16 +49,14 @@ public class CatalogClient {
 
 	protected RestTemplate getRestTemplate() {
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-				false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.registerModule(new Jackson2HalModule());
 
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		converter.setSupportedMediaTypes(Arrays.asList(MediaTypes.HAL_JSON));
 		converter.setObjectMapper(mapper);
 
-		return new RestTemplate(
-				Collections.<HttpMessageConverter<?>> singletonList(converter));
+		return new RestTemplate(Collections.<HttpMessageConverter<?>>singletonList(converter));
 	}
 
 	public double price(long itemId) {
@@ -67,19 +64,16 @@ public class CatalogClient {
 	}
 
 	public Collection<Item> findAll() {
-		PagedResources<Item> pagedResources = restTemplate.getForObject(
-				catalogURL(), ItemPagedResources.class);
+		PagedModel<Item> pagedResources = getRestTemplate().getForObject(catalogURL(), ItemPagedResources.class);
 		return pagedResources.getContent();
 	}
 
 	private String catalogURL() {
 		if (useRibbon) {
 			ServiceInstance instance = loadBalancer.choose("CATALOG");
-			return "http://" + instance.getHost() + ":" + instance.getPort()
-					+ "/catalog/";
+			return "http://" + instance.getHost() + ":" + instance.getPort() + "/catalog/";
 		} else {
-			return "http://" + catalogServiceHost + ":" + catalogServicePort
-					+ "/catalog/";
+			return "http://" + catalogServiceHost + ":" + catalogServicePort + "/catalog/";
 		}
 	}
 

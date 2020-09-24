@@ -3,8 +3,8 @@ package com.ewolff.microservice.order.customerstub;
 import java.util.Arrays;
 
 import org.springframework.context.annotation.Profile;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.PagedResources.PageMetadata;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.PagedModel.PageMetadata;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,16 +25,16 @@ public class CustomerStub {
 		if (id != 42) {
 			return new ResponseEntity<Customer>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Customer>(new Customer(42, "Eberhard",
-				"Wolff", "eberhard.wolff@gmail.com", "Unter den Linden",
-				"Berlin"), HttpStatus.OK);
+		return new ResponseEntity<Customer>(
+				new Customer(42, "Eberhard", "Wolff", "eberhard.wolff@gmail.com", "Unter den Linden", "Berlin"),
+				HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public PagedResources<Customer> getAll() {
-		return new PagedResources<Customer>(Arrays.asList(new Customer(42,
-				"Eberhard", "Wolff", "eberhard.wolff@gmail.com",
-				"Unter den Linden", "Berlin")), new PageMetadata(1, 0, 1));
+	public PagedModel<Customer> getAll() {
+		return PagedModel.of(Arrays.asList(
+				new Customer(42, "Eberhard", "Wolff", "eberhard.wolff@gmail.com", "Unter den Linden", "Berlin")),
+				new PageMetadata(1, 0, 1));
 	}
 
 }
