@@ -21,3 +21,9 @@ jobs:
       run: cd microservice-consul-demo && ./mvnw -B package --file pom.xml
     - name: Create Docker images 
       run: cd docker && docker-compose build
+    - name: Create Docker images Zipkin
+      run: cd docker && docker-compose -f docker-compose-zipkin build
+    - name: Create Docker images Elastic
+      run: cd docker && docker-compose -f docker-compose-elastic build
+    - name: Create Docker images Prometheus
+      run: cd docker && docker-compose -f docker-compose-elastic build
