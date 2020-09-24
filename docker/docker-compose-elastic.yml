@@ -38,6 +38,7 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - xpack.security.enabled=false
       - xpack.monitoring.enabled=false
+      - discovery.type=single-node
   kibana:
     image: docker.elastic.co/kibana/kibana:6.3.1
     ports:
