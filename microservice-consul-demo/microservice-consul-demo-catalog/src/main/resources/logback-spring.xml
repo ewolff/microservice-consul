@@ -17,7 +17,6 @@
 			class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
 			<providers>
 				<arguments />
-				<stackTrace />
 				<timestamp>
 					<timeZone>UTC</timeZone>
 				</timestamp>

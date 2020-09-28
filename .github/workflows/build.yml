@@ -22,8 +22,8 @@ jobs:
     - name: Create Docker images 
       run: cd docker && docker-compose build
     - name: Create Docker images Zipkin
-      run: cd docker && docker-compose -f docker-compose-zipkin build
+      run: cd docker && docker-compose -f docker-compose-zipkin.yml build
     - name: Create Docker images Elastic
-      run: cd docker && docker-compose -f docker-compose-elastic build
+      run: cd docker && docker-compose -f docker-compose-elastic.yml build
     - name: Create Docker images Prometheus
-      run: cd docker && docker-compose -f docker-compose-elastic build
+      run: cd docker && docker-compose -f docker-compose-prometheus.yml build
